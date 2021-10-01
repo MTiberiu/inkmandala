@@ -1,0 +1,61 @@
+@import "../../styles/variables.scss";
+footer {
+  position: relative;
+  height: 10%;
+  background: primary-neutral-colors(90);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  z-index: 1000;
+  .colors {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    .color {
+      width: 40px;
+      height: 40px;
+
+      border-radius: 50%;
+      margin: 20px 5px;
+      box-shadow: rgba(61, 10, 77, 0.952) 0px 0px 2px;
+      &.color1 {
+        background: hsl(0, 38%, 63%);
+        border: 2px solid hsl(0, 38%, 60%);
+      }
+      &.color2 {
+        background: hsl(40, 38%, 63%);
+        border: 2px solid hsl(40, 38%, 60%);
+      }
+      &.color3 {
+        background: hsl(80, 38%, 63%);
+        border: 2px solid hsl(80, 38%, 60%);
+      }
+      &.color4 {
+        background: hsl(120, 38%, 63%);
+        border: 2px solid hsl(120, 38%, 60%);
+      }
+      &.color5 {
+        background: hsl(160, 38%, 63%);
+        border: 2px solid hsl(160, 38%, 60%);
+      }
+      &.color6 {
+        background: hsl(200, 38%, 63%);
+        border: 2px solid hsl(200, 38%, 60%);
+      }
+      &.color7 {
+        background: hsl(240, 38%, 63%);
+        border: 2px solid hsl(240, 38%, 60%);
+      }
+      &.color8 {
+        background: hsl(280, 38%, 63%);
+        border: 2px solid hsl(280, 38%, 60%);
+      }
+      &.color9 {
+        background: hsl(320, 38%, 63%);
+        border: 2px solid hsl(320, 38%, 60%);
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@import "../styles/variables.scss";
+.loading {
+  cursor: progress;
+
+  .skeleton-card-img {
+    width: 85%;
+    height: 0;
+    padding-bottom: 85%;
+    border-radius: 50%;
+  }
+  .skeleton-page-number {
+    width: 50px;
+    height: 20px;
+  }
+  .skeleton-title {
+    width: 230px;
+    height: 20px;
+  }
+}
+
+.skeleton-title,
+.skeleton-page-number,
+.skeleton-card-img {
+  filter: blur(2px);
+
+  animation: skeleton-loading 0.5s linear;
+}
+
+@keyframes skeleton-loading {
+  100% {
+    background-color: $card-border-hover;
+  }
+
+  0% {
+    background-color: hsl(0, 0%, 89%);
+  }
+}

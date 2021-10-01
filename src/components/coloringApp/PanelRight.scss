@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+.color-piker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid primary-neutral-colors(10);
+  .rcp {
+    padding: 20px;
+    background: primary-neutral-colors(20);
+    border-radius: 0px;
+    padding-bottom: 5px;
+    .rcp-saturation {
+      border-radius: 5px;
+    }
+    .rcp-body {
+      border-top: 1px solid primary-neutral-colors(10);
+      margin-top: 20px;
+      .rcp-hue {
+        width: 90%;
+      }
+    }
+  }
+}
+
+.active-color {
+  width: 100%;
+  margin: 20px;
+  height: 100px;
+  background: primary-neutral-colors(30);
+  transition: all 0.5s;
+  border-bottom: 1px solid primary-neutral-colors(10);
+}

@@ -1,0 +1,16 @@
+@import "./styles/variables.scss";
+.App {
+  background: $secondary;
+  margin: 0px;
+
+  min-height: 100vh;
+  .load-more {
+    background: #ffffffb7;
+    height: 30px;
+    width: 60%;
+    margin: auto;
+
+    border-radius: 5px;
+    text-align: center;
+  }
+}

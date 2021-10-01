@@ -1,0 +1,39 @@
+@import "../../styles/variables.scss";
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid primary-neutral-colors(80);
+  padding: 4px;
+  transition: 0.2s ease-out;
+  border-radius: 50%;
+  background-color: primary-neutral-colors(70);
+  box-shadow: rgba(167, 113, 184, 0.288) 0px 0px 2px;
+  width: 38px;
+  height: 38px;
+  outline: none;
+  margin: 2px;
+  svg {
+    fill: primary-neutral-colors(30);
+    pointer-events: none;
+  }
+  &.active {
+    background: primary-colors(60);
+    border-color: primary-neutral-colors(80);
+    padding: 3px;
+    padding: 2px;
+    svg {
+      fill: primary-neutral-colors(90);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background: primary-colors(60);
+    transform: scale(0.9);
+  }
+}

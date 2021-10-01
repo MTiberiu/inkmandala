@@ -1,0 +1,55 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+
+$hue-value: 283;
+$saturation-value: 25%;
+$light-value: 36%;
+// $saturation-value: 36%;
+// $light-value: 83%;
+$saturation-neutral-value: 0%;
+$border-dark: #120418;
+$roboto-slab: "Roboto Slab", serif;
+$open-sans: "Open Sans", sans-serif;
+
+$primary: hsl($hue-value, $saturation-value, $light-value);
+$primary-light: #bdabc4;
+$primary-colors: (
+  10: hsl($hue-value, $saturation-value, 10%),
+  20: hsl($hue-value, $saturation-value, 20%),
+  30: hsl($hue-value, $saturation-value, 30%),
+  38: hsl($hue-value, $saturation-value, 38%),
+  40: hsl($hue-value, $saturation-value, 40%),
+  50: hsl($hue-value, $saturation-value, 50%),
+  60: hsl($hue-value, $saturation-value, 60%),
+  70: hsl($hue-value, $saturation-value, 70%),
+  80: hsl($hue-value, $saturation-value, 80%),
+  90: hsl($hue-value, $saturation-value, 90%),
+);
+@function primary-colors($key) {
+  @return map-get($primary-colors, $key);
+}
+$primary-neutral-colors: (
+  10: hsl($hue-value, $saturation-neutral-value, 10%),
+  20: hsl($hue-value, $saturation-neutral-value, 20%),
+  30: hsl($hue-value, $saturation-neutral-value, 30%),
+  40: hsl($hue-value, $saturation-neutral-value, 40%),
+  50: hsl($hue-value, $saturation-neutral-value, 50%),
+  60: hsl($hue-value, $saturation-neutral-value, 60%),
+  70: hsl($hue-value, $saturation-neutral-value, 70%),
+  80: hsl($hue-value, $saturation-neutral-value, 80%),
+  90: hsl($hue-value, $saturation-neutral-value, 90%),
+);
+@function primary-neutral-colors($key) {
+  @return map-get($primary-neutral-colors, $key);
+}
+
+$primary-dark: #3b134b;
+$secondary: linear-gradient(
+  153deg,
+  hsl(283, 10%, 80%),
+  hsl(90, 10%, 80%),
+  hsl(283, 10%, 80%)
+);
+$text-primary: hsl(279, 18%, 74%);
+
+$card-border: #00000018;
+$card-border-hover: #1818181a;

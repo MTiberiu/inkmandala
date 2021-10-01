@@ -1,0 +1,89 @@
+@import "../styles/variables.scss";
+
+.Pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  margin: 20px auto;
+  margin-top: 0px;
+
+  .card-bg {
+    margin: 5px;
+    border-radius: 10px;
+
+    // background-image: repeating-linear-gradient(
+    //   -45deg,
+    //   $stripe-one 0px,
+    //   $stripe-one 10px,
+    //   $stripe-two 10px,
+    //   $stripe-two 20px
+    // );
+    // border: 3px solid $card-border;
+    .card {
+      position: relative;
+      border: 3px solid $card-border;
+      width: 300px;
+      height: 425px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5px;
+      background: #ffffffb7;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+        0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+      transition: 0.2s ease-out;
+
+      img {
+        display: block;
+        width: 245px;
+        margin: auto;
+
+        animation: img-loading 0.2s linear;
+      }
+
+      .title {
+        position: absolute;
+        top: 10px;
+        margin-bottom: 30px;
+        font-family: $roboto-slab;
+        font-weight: 200;
+        color: $text-primary;
+      }
+      .page-number {
+        position: absolute;
+        bottom: 5px;
+
+        margin-bottom: 5px;
+        font-family: $roboto-slab;
+        font-weight: 200;
+        color: $text-primary;
+      }
+    }
+
+    .card:hover {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12);
+      border: 3px solid $card-border-hover;
+      background: rgba(252, 252, 252, 0.363);
+    }
+    .full-page {
+      img {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+@keyframes img-loading {
+  30% {
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  0% {
+    filter: blur(2px);
+    opacity: 0.2;
+  }
+}

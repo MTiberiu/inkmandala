@@ -1,0 +1,14 @@
+let thisPath = {
+  h,
+  s,
+  l,
+  sh,
+  ss,
+  sl,
+  index,
+  id,
+  fill: {
+    style,
+    stroke,
+  },
+};

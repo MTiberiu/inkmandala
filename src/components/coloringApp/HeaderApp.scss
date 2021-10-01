@@ -1,0 +1,49 @@
+@import "../../styles/variables.scss";
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  height: 10%;
+  box-sizing: border-box;
+  background: primary-neutral-colors(90);
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.041) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  nav {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    .menu-items {
+      display: flex;
+      padding: 5px;
+      background: primary-neutral-colors(80);
+      box-shadow: rgba(167, 113, 184, 0.288) 0px 0px 2px;
+
+      margin-right: 5px;
+      .togle-ui {
+        padding: 3px;
+      }
+    }
+    .menu-items:first-child {
+      border-radius: 15px 0px 0px 15px;
+    }
+    .menu-items:last-child {
+      border-radius: 0px 15px 15px 0px;
+    }
+    .reset-menu {
+      border-right: none;
+    }
+    ul li {
+      display: inline;
+      margin: 0px 5px;
+      padding: 5px 10px;
+    }
+  }
+}
