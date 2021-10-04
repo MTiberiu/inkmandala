@@ -1,31 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nav.scss";
 function Nav(props) {
-  const filterCardsHandler = (event) => {
-    props.filterCards(event);
+  const [activeMenuButton, setActiveMenuButton] = useState("");
+
+  const filterCardsHandler = (e) => {
+    props.filterCards(e);
+    setActiveMenuButton(e.target.id);
   };
   return (
     <div className="Nav" style={{ width: "100%" }}>
       <ul>
         <li>
-          <a id="" onClick={filterCardsHandler}>
+          <button
+            id=""
+            className={`${activeMenuButton === "" ? "active" : ""}`}
+            onClick={filterCardsHandler}
+          >
             Home
-          </a>
+          </button>
         </li>
         <li>
-          <a id={4} onClick={filterCardsHandler}>
+          <button
+            id={4}
+            className={`${activeMenuButton === "4" ? "active" : ""}`}
+            onClick={filterCardsHandler}
+          >
             Easy
-          </a>
+          </button>
         </li>
         <li>
-          <a id={5} onClick={filterCardsHandler}>
+          <button
+            id={5}
+            className={`${activeMenuButton === "5" ? "active" : ""}`}
+            onClick={filterCardsHandler}
+          >
             Medium
-          </a>
+          </button>
         </li>
         <li>
-          <a id={9} onClick={filterCardsHandler}>
+          <button
+            id={9}
+            className={`${activeMenuButton === "9" ? "active" : ""}`}
+            onClick={filterCardsHandler}
+          >
             Hard
-          </a>
+          </button>
         </li>
       </ul>
     </div>

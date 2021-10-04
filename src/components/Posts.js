@@ -29,7 +29,7 @@ export default function Posts(props) {
       const totalPosts = res.headers["x-wp-total"];
       setRemainingPosts(totalPosts - 10 * pageNumber);
     });
-  }, [pageNumber]);
+  }, [pageNumber, ROUTE]);
 
   const lastPageElementRef = useCallback(
     (node) => {

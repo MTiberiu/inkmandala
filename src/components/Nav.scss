@@ -14,7 +14,7 @@
 
   ul {
     padding: 0px;
-    margin: 0px;
+    margin: 5px;
     li {
       list-style-type: none;
       display: inline-block;
@@ -23,18 +23,29 @@
       cursor: pointer;
 
       border-right: 2px solid #55485c;
-      a {
-        color: inherit;
-        text-decoration: inherit;
-        display: block;
-        padding: 2px 10px;
-        font-family: $open-sans;
-        font-weight: 200;
+      button {
+        border-radius: 0;
+        height: auto;
+        width: auto;
+        padding: 8px 15px;
+        margin-left: 5px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        border: none;
+        &:hover {
+          background: $primary;
+          color: white;
+        }
+        &:active {
+          color: white;
+        }
+        &.active {
+          color: white;
+        }
       }
     }
     li:hover {
       color: white;
-      background: $primary;
     }
   }
 }

@@ -1,7 +1,26 @@
 import React, { useState } from "react";
 import "./HeaderApp.scss";
 import HeaderAppButton from "./HeaderAppButton";
-import { useMode } from "./EventsContext";
+import HslButtons from "./header/HslButtons";
+import ModeButons from "./header/ModeButtons";
+import StrokeSizeButtons from "./header/StrokeSizeButtons";
+
+const SELECTED = {
+  HUE: "hue",
+  SATURATION: "saturation",
+  LIGHT: "light",
+  PATH: "fill",
+  STROKE: "stroke",
+  BUBBLE: "bubble-effect",
+  NEON: "neon-effect",
+  STROKESIZE: {
+    REMOVE: "0",
+    ONE: "1",
+    TWO: "2",
+    THREE: "3",
+    LOKED: "locked",
+  },
+};
 
 const HeaderApp = () => {
   const [darkBg, setDarkBg] = useState(false);
@@ -20,11 +39,6 @@ const HeaderApp = () => {
     }
   };
 
-  const [activeMenuButton, setActiveMenuButton] = useState("hue");
-  const [activeModeButton, setActiveModeButton] = useState("select-path");
-  const [activeStrokeButton, setActiveStrokeButton] =
-    useState("remove-outlines");
-  const changeMode = useMode();
   function resetColors() {
     const paths = document.querySelectorAll("path");
     const layerColors = document.querySelectorAll(".shape-color");
@@ -39,47 +53,19 @@ const HeaderApp = () => {
       layer.style.backgroundColor = "transparent";
     });
   }
-  const setActivHslHandler = (e) => {
-    setActiveMenuButton(e.target.id);
-    changeMode(e.target.id);
-  };
-  const setActivModeHandler = (e) => {
-    setActiveModeButton(e.target.id);
-  };
-  const setActivStrokeHandler = (e) => {
-    setActiveStrokeButton(e.target.id);
-  };
+
   return (
     <header className="app">
       <nav>
         <div className="menu-items">
-          <HeaderAppButton
-            className={`menu ${activeMenuButton === "hue" ? "active" : ""}`}
-            id={"hue"}
-            title={"Change color hue"}
-            icoHref={"#icon-hue"}
-            setActive={setActivHslHandler}
-          />
-
-          <HeaderAppButton
-            className={`menu ${activeMenuButton === "light" ? "active" : ""}`}
-            id={"light"}
-            title={"Add/Remove Light"}
-            icoHref={"#icon-light"}
-            setActive={setActivHslHandler}
-          />
-
-          <HeaderAppButton
-            className={`menu ${
-              activeMenuButton === "saturation" ? "active" : ""
-            }`}
-            id={"saturation"}
-            title={"Add/Remove Saturation"}
-            icoHref={"#icon-saturation"}
-            setActive={setActivHslHandler}
-          />
+          <HslButtons selected={SELECTED} />
         </div>
-
+        <div className="menu-items effect">
+          <ModeButons selected={SELECTED} />
+        </div>
+        <div className="menu-items stroke">
+          <StrokeSizeButtons selected={SELECTED.STROKESIZE} />
+        </div>
         <div className="menu-items">
           <button
             className={`mode-stroke ${toggleNightButton}`}

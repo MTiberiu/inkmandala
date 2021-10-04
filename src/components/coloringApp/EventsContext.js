@@ -5,7 +5,8 @@ const LayersContext = React.createContext();
 const PathContext = React.createContext();
 const ModeContext = React.createContext();
 const ColorPalleteContext = React.createContext();
-
+const EffectsContext = React.createContext();
+const StrokeContext = React.createContext();
 export function useEvents() {
   return useContext(EventsContext);
 }
@@ -21,79 +22,123 @@ export function usePath() {
 export function useMode() {
   return useContext(ModeContext);
 }
+export function useColorEffects() {
+  return useContext(EffectsContext);
+}
+export function useStroke() {
+  return useContext(StrokeContext);
+}
 
 export function useColorPalette() {
   return useContext(ColorPalleteContext);
 }
 
-const HSLMODE = {
-  HUE: "hue",
-  SATURATION: "saturation",
-  LIGHT: "light",
+const select = {
+  hsl: { hue: "hue", saturation: "saturation", light: "light" },
+  mode: { path: "fill", stroke: "stroke" },
+  effects: { bubble: "bubble-effect", neon: "neon-effect" },
+  stroke: {
+    remove: "remove-outlines",
+    one: "stroke-size-one",
+    two: "stroke-size-two",
+    three: "stroke-size-three",
+    locked: "locked",
+  },
 };
 
 export function FunctionalityProvider({ children }) {
-  let hslMode = HSLMODE.HUE;
-
-  const hslValues = {
-    h: "50",
-    s: "50",
-    l: "50",
-  };
-
-  let color;
-
+  let selectedHSL = select.hsl.hue;
+  let curColor, h, s, l;
+  let selectedMode = "fill";
+  let strokeSize = 0;
+  let isStrokeLoked = false;
   function randomHSLValues() {
-    hslValues.h = Math.floor(Math.random() * 360);
-    hslValues.s = Math.floor(Math.random() * 100 + 20);
-    hslValues.l = Math.floor(Math.random() * 60 + 20);
+    h = Math.floor(Math.random() * 360);
+    s = Math.floor(Math.random() * 45 + 30);
+    l = Math.floor(Math.random() * 63 + 25);
   }
   randomHSLValues();
-  const pathReceiveValues = () => {
-    color = `hsl(${hslValues.h}, ${hslValues.s}%, ${hslValues.l}%)`;
-    selectedPath.style.fill = color;
-    selectedPath.h = hslValues.h;
-    selectedPath.s = hslValues.s;
-    selectedPath.l = hslValues.l;
+
+  const setColor = (color) => {
+    if (selectedMode === "stroke" && !isStrokeLoked) {
+      selectedPath.setAttribute("stroke-width", strokeSize);
+    }
+    selectedPath.style[selectedMode] = color;
   };
 
-  let colorValues = hslValues.h;
+  const checkIfStrokeIsLoked = (param) => {
+    if (param === select.stroke.locked) {
+      isStrokeLoked = true;
+    } else {
+      isStrokeLoked = false;
+    }
+  };
+
+  const updateStroke = (param) => {
+    checkIfStrokeIsLoked(param);
+    strokeSize = param;
+  };
+
+  const updateEffects = (param) => {
+    selectedMode = param;
+  };
+  const updateDefinedValues = (modeSelected) => {
+    h = selectedPath[modeSelected].h;
+    s = selectedPath[modeSelected].s;
+    l = selectedPath[modeSelected].l;
+    // [h, s, l] = selectedPath[modeSelected][{ h, s, l }];
+  };
+
+  const pathReceiveValues = (modeSelected) => {
+    curColor = `hsl(${h}, ${s}%, ${l}%)`;
+    setColor(curColor);
+    selectedPath[modeSelected] = { h: h, s: s, l: l };
+  };
+
+  let colorValues = h;
   let colorRangeMax = 360;
   let colorRangeMin = 0;
-  let selectedPath = { style: { fill: "white" }, h: "", s: "", l: "" };
-  const colorPalette = (h, s, l) => {
-    colorValues = hslValues.h = h;
-    hslValues.s = s;
-    hslValues.l = l;
+  let selectedPath = {
+    style: { fill: "white", stroke: "red" },
+    fill: { h: "red", s: "", l: "" },
+    stroke: { h: "", s: "", l: "" },
   };
-  const updateDefinedValues = () => {
-    hslValues.h = selectedPath.h;
-    hslValues.s = selectedPath.s;
-    hslValues.l = selectedPath.l;
+
+  const colorPalette = (hue, sat, light) => {
+    colorValues = h = hue;
+    s = sat;
+    l = light;
   };
-  const setselectedPath = (index) => {
-    setActiveColor(index);
-    pathReceiveValues();
-  };
-  const checkSelected = () => {
-    if (!selectedPath.h) {
-      hslValues.h = colorValues;
+
+  function effect(modeSelected) {
+    selectedPath.stroke.l = selectedPath.fill.l;
+    if (modeSelected === select.effects.bubble) {
+      selectedPath.fill.l -= 20;
+    } else if (modeSelected === select.effects.effect) {
+      selectedPath.fill.l += 20;
+    }
+  }
+
+  const checkSelected = (modeSelected) => {
+    console.log("selectedPath[modeSelected].h", modeSelected);
+    if (!selectedPath[modeSelected]) {
+      h = colorValues;
     } else {
-      if (hslMode === HSLMODE.HUE) {
-        colorValues = selectedPath.h;
-        updateDefinedValues();
+      if (selectedHSL === select.hsl.hue) {
+        colorValues = selectedPath[modeSelected].h;
+        updateDefinedValues(modeSelected);
         changeColorValue();
-        hslValues.h = colorValues;
-      } else if (hslMode === HSLMODE.SATURATION) {
-        colorValues = selectedPath.s;
-        updateDefinedValues();
+        h = colorValues;
+      } else if (selectedHSL === select.hsl.saturation) {
+        colorValues = selectedPath[modeSelected].s;
+        updateDefinedValues(modeSelected);
         changeColorValue();
-        hslValues.s = colorValues;
-      } else if (hslMode === HSLMODE.LIGHT) {
-        colorValues = selectedPath.l;
-        updateDefinedValues();
+        s = colorValues;
+      } else if (selectedHSL === select.hsl.light) {
+        colorValues = selectedPath[modeSelected].l;
+        updateDefinedValues(modeSelected);
         changeColorValue();
-        hslValues.l = colorValues;
+        l = colorValues;
       }
     }
   };
@@ -121,8 +166,8 @@ export function FunctionalityProvider({ children }) {
   });
 
   const updateMode = (param) => {
-    hslMode = param;
-    if (param === HSLMODE.HUE) {
+    selectedHSL = param;
+    if (param === select.hsl.hue) {
       setColorRange(0, 360);
     } else {
       setColorRange(10, 90);
@@ -138,24 +183,17 @@ export function FunctionalityProvider({ children }) {
     if (selectedPath !== e.target) {
       selectedPath = e.target;
     }
-
-    return selectedPath;
   };
 
-  const getColor = (e) => {
-    isPathSelected(e);
-    pathReceiveValues();
-    setActiveColor(selectedPath.index);
-  };
-
-  const selectedPathHandler = (color) => {
-    selectedPath.style.fill = color;
+  const selectedPathHandler = (curColor, selectedMode) => {
+    selectedPath.style[selectedMode] = curColor;
   };
 
   const eventSwitchValues = (e) => {
     let index = e.target.index;
-    selectedPath = e.target;
-    checkSelected();
+    // selectedPath = e.target;
+    isPathSelected(e);
+    checkSelected(selectedMode);
     setselectedPath(index);
   };
 
@@ -170,11 +208,21 @@ export function FunctionalityProvider({ children }) {
         layers[index] = path;
       }
     });
-
-    if (layers.length !== 0) {
-    }
   };
 
+  const setselectedPath = (index) => {
+    setActiveColor(index);
+    pathReceiveValues(selectedMode);
+  };
+
+  const getColor = (e) => {
+    // isPathSelected(e);
+    selectedPath = e.target;
+    pathReceiveValues(selectedMode);
+    setActiveColor(selectedPath.index);
+  };
+
+  // find a better solution
   const setActiveColor = (index) => {
     let activeLayerIcoColor = document.getElementById(
       `#path-layer${layers[index].index}`
@@ -187,10 +235,10 @@ export function FunctionalityProvider({ children }) {
       `.layer-container${layers[index].index}`
     );
     let activeColor = document.querySelector(".active-color");
-    activeLayerIcoColor.style.backgroundColor = color;
+    activeLayerIcoColor.style.backgroundColor = curColor;
     activeLayerColor.classList.add("activeLayer");
-    activeColor.style.backgroundColor = color;
-    layers[index].style.backgroundColor = color;
+    activeColor.style.backgroundColor = curColor;
+    layers[index].style.backgroundColor = curColor;
   };
 
   return (
@@ -199,7 +247,11 @@ export function FunctionalityProvider({ children }) {
         <PathContext.Provider value={selectedPathHandler}>
           <ModeContext.Provider value={updateMode}>
             <ColorPalleteContext.Provider value={colorPalette}>
-              {children}
+              <EffectsContext.Provider value={updateEffects}>
+                <StrokeContext.Provider value={updateStroke}>
+                  {children}
+                </StrokeContext.Provider>
+              </EffectsContext.Provider>
             </ColorPalleteContext.Provider>
           </ModeContext.Provider>
         </PathContext.Provider>

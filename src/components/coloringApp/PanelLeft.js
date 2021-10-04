@@ -1,10 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import printJS from "print-js";
 const PanelLeft = (props) => {
-  const [result, setResult] = useState("");
-  // const printFile = props.info.acf.print_pdf;
-
   function closePageHadler() {
     props.onClickClosePage();
     document.body.style.overflow = "visible";
@@ -26,34 +22,33 @@ const PanelLeft = (props) => {
     );
     selectedSvg = selectedSvg.replace(/\\n/g, "");
     selectedSvg = selectedSvg.replace(/\\/g, "");
-    setResult(selectedSvg.slice(1, -1));
-    var a = document.createElement("a");
-    a.download = `downloadSVG.svg`;
+    let result = selectedSvg.slice(1, -1);
+    const a = document.createElement("a");
 
     a.href = `data:image/svg+xml;utf8,${result}`;
+    a.download = `downloadSVG.svg`;
     a.click();
   }
 
   function svg2img() {
-    var itm = JSON.stringify(document.querySelector("#svg svg ").outerHTML);
+    let itm = JSON.stringify(document.querySelector("#svg svg ").outerHTML);
     itm = itm.replace(/\\n/g, "");
     itm = itm.replace(/\\/g, "");
-    var result = itm.slice(1, -1);
+    const result = itm.slice(1, -1);
 
-    var svg64 = btoa(result); //for utf8: btoa(unescape(encodeURIComponent(xml)))
-    var b64start = "data:image/svg+xml;base64,";
-    var image64 = b64start + svg64;
-    var canvas = document.querySelector("canvas");
+    const svg64 = btoa(result); //for utf8: btoa(unescape(encodeURIComponent(xml)))
+    const b64start = "data:image/svg+xml;base64,";
+    const image64 = b64start + svg64;
+    const canvas = document.querySelector("canvas");
     canvas.width = 800;
     canvas.height = 800;
-    var context = canvas.getContext("2d");
+    const context = canvas.getContext("2d");
 
-    var image = new Image();
+    const image = new Image();
     image.src = image64;
     image.onload = function () {
       context.drawImage(image, 0, 0);
-      const imgInfo = context.getImageData(0, 0, canvas.width, canvas.height);
-      var a = document.createElement("a");
+      const a = document.createElement("a");
       a.download = `downloadPNG.png`;
       a.href = canvas.toDataURL("image/png");
       a.click();

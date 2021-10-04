@@ -5,6 +5,7 @@ import { usePath } from "./EventsContext";
 const PanelColorPiker = (props) => {
   const [color, setColor] = useColor("hex", "#121212");
   const colorPath = usePath();
+  document.querySelector(".canvas").style.background = color.hex;
   colorPath(color.hex);
   props.colorPath(color.hex);
 
