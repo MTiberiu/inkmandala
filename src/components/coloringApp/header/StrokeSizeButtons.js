@@ -25,7 +25,7 @@ const StrokeSizeButtons = (param) => {
         className={`mode-stroke ${
           activeStrokeButton === SELECTED.ONE ? "active" : ""
         }`}
-        id={1}
+        id={4}
         title={"Select Icon Stroke Size One"}
         icoHref={"#icon-stroke-size-one"}
         setActive={setActivStrokeHandler}
@@ -35,7 +35,7 @@ const StrokeSizeButtons = (param) => {
         className={`mode-stroke ${
           activeStrokeButton === SELECTED.TWO ? "active" : ""
         }`}
-        id={2}
+        id={6}
         title={"Select Icon Stroke Size Two"}
         icoHref={"#icon-stroke-size-two"}
         setActive={setActivStrokeHandler}
@@ -44,7 +44,7 @@ const StrokeSizeButtons = (param) => {
         className={`mode-stroke ${
           activeStrokeButton === SELECTED.THREE ? "active" : ""
         }`}
-        id={3}
+        id={8}
         title={"Select Icon Stroke Size Three"}
         icoHref={"#icon-stroke-size-three"}
         setActive={setActivStrokeHandler}

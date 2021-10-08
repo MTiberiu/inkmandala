@@ -3,23 +3,20 @@ import { useState } from "react";
 import Card from "./Card";
 import Nav from "./Nav";
 
-const Cards = (props) => {
+const Cards = ({ pages, onClickGetPageData }) => {
   // const [pages, setPages] = useState(props.pages);
   const [category, setCategory] = useState(0);
   const savePageDataHandler = (getPageData) => {
-    props.onClickGetPageData(getPageData);
+    onClickGetPageData(getPageData);
   };
   const filterCardsHandler = (event) => {
     let id = Number(event.target.id);
     setCategory(id);
   };
 
-  let filterCards = props.pages.filter((card) => {
+  let filterCards = pages.filter((card) => {
     const postCategory = card.categories[0];
-    if (category === 0) {
-      return card;
-    } else if (postCategory === category) {
-      console.log("typeof card.categories[0]", typeof postCategory);
+    if (category === 0 || postCategory === category) {
       return card;
     }
     return null;

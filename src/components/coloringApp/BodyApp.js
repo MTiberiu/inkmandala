@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "./BodyApp.scss";
 import Head from "./Head";
 import HeaderApp from "./HeaderApp";
-
 import IconSimbolsLoad from "./IconSimbolsLoad";
 import PanelLeft from "./PanelLeft";
 import PanelRight from "./PanelRight";
@@ -16,7 +15,6 @@ const BodyApp = (props) => {
 
   useEffect(() => {
     const getPaths = componentRef.current;
-
     setPaths(getPaths);
   }, []);
 
@@ -28,7 +26,7 @@ const BodyApp = (props) => {
   const title = info.title.rendered
     .replace("&#8211;", " ")
     .replace("&#8217;", "'");
-
+  window.history.pushState("", "", info.slug);
   return (
     <div id="container" ref={componentRef}>
       <FunctionalityProvider>

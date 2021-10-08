@@ -4,9 +4,10 @@ import "./Layers.scss";
 import Layer from "./Layer";
 
 import { useLayers } from "./EventsContext";
-const Layers = (props) => {
+const Layers = ({ selectedPath }) => {
   const [iteratePaths, setIteratePaths] = useState([]);
   const propsLayer = useLayers();
+
   function addLayersHandler() {
     setIteratePaths(propsLayer);
   }
@@ -27,7 +28,7 @@ const Layers = (props) => {
           <Layer
             key={layer.index}
             layer={layer}
-            selectedPath={props.selectedPath}
+            selectedPath={selectedPath}
             index={layer.index}
           />
         );

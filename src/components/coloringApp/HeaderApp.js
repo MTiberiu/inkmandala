@@ -4,6 +4,7 @@ import HeaderAppButton from "./HeaderAppButton";
 import HslButtons from "./header/HslButtons";
 import ModeButons from "./header/ModeButtons";
 import StrokeSizeButtons from "./header/StrokeSizeButtons";
+import Ref from "./header/Ref";
 
 const SELECTED = {
   HUE: "hue",
@@ -15,9 +16,9 @@ const SELECTED = {
   NEON: "neon-effect",
   STROKESIZE: {
     REMOVE: "0",
-    ONE: "1",
-    TWO: "2",
-    THREE: "3",
+    ONE: "2",
+    TWO: "3",
+    THREE: "4",
     LOKED: "locked",
   },
 };
@@ -97,6 +98,7 @@ const HeaderApp = () => {
             setActive={resetColors}
           />
         </div>
+        <div className="menu-items reset-menu"></div>
       </nav>
     </header>
   );

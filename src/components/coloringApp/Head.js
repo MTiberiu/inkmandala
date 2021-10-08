@@ -1,12 +1,12 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-const Head = (props) => {
+const Head = ({ title, slug }) => {
   return (
     <HelmetProvider>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{props.title}</title>
-        <link rel="canonical" href={`https://inkmandala.com/${props.slug}`} />
+        <title>{title}</title>
+        <link rel="canonical" href={`https://inkmandala.com/${slug}`} />
       </Helmet>
     </HelmetProvider>
   );

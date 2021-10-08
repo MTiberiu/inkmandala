@@ -1,8 +1,8 @@
 import React from "react";
 import printJS from "print-js";
-const PanelLeft = (props) => {
+const PanelLeft = ({ onClickClosePage }) => {
   function closePageHadler() {
-    props.onClickClosePage();
+    onClickClosePage();
     document.body.style.overflow = "visible";
     window.history.pushState("", "New Page Title", "/");
   }
@@ -106,6 +106,7 @@ const PanelLeft = (props) => {
           SVG
         </div>
       </div>
+      <div id="testul"></div>
     </div>
   );
 };
