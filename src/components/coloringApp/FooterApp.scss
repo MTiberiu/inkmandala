@@ -1,5 +1,6 @@
 @import "../../styles/variables.scss";
-footer {
+
+div.app {
   position: relative;
   height: 10%;
   background: primary-neutral-colors(90);
@@ -19,42 +20,29 @@ footer {
 
       border-radius: 50%;
       margin: 20px 5px;
-      box-shadow: rgba(61, 10, 77, 0.952) 0px 0px 2px;
-      &.color1 {
-        background: hsl(0, 38%, 63%);
-        border: 2px solid hsl(0, 38%, 60%);
+      box-shadow: rgba(19, 19, 19, 0.952) 0px 0px 2px;
+      border: 3px solid white;
+    }
+  }
+  .next-color {
+    .arrow {
+      width: 15px;
+      height: 15px;
+      display: inline-block;
+      border: solid primary-neutral-colors(60);
+      border-width: 0 4px 4px 0;
+      padding: 3px;
+      cursor: pointer;
+      &.right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
       }
-      &.color2 {
-        background: hsl(40, 38%, 63%);
-        border: 2px solid hsl(40, 38%, 60%);
+      &.left {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
       }
-      &.color3 {
-        background: hsl(80, 38%, 63%);
-        border: 2px solid hsl(80, 38%, 60%);
-      }
-      &.color4 {
-        background: hsl(120, 38%, 63%);
-        border: 2px solid hsl(120, 38%, 60%);
-      }
-      &.color5 {
-        background: hsl(160, 38%, 63%);
-        border: 2px solid hsl(160, 38%, 60%);
-      }
-      &.color6 {
-        background: hsl(200, 38%, 63%);
-        border: 2px solid hsl(200, 38%, 60%);
-      }
-      &.color7 {
-        background: hsl(240, 38%, 63%);
-        border: 2px solid hsl(240, 38%, 60%);
-      }
-      &.color8 {
-        background: hsl(280, 38%, 63%);
-        border: 2px solid hsl(280, 38%, 60%);
-      }
-      &.color9 {
-        background: hsl(320, 38%, 63%);
-        border: 2px solid hsl(320, 38%, 60%);
+      &:hover {
+        border-color: primary-colors(60);
       }
     }
   }

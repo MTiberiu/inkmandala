@@ -128,6 +128,7 @@ export function FunctionalityProvider({ children }) {
     colorValues = h = hue;
     s = sat;
     l = light;
+    console.log(hue, sat, light);
   };
 
   const checkSelected = (modeSelected) => {
@@ -245,21 +246,21 @@ export function FunctionalityProvider({ children }) {
 
   // find a better solution
   const setActiveColor = (index) => {
-    // let activeLayerIcoColor = document.getElementById(
-    //   `#path-layer${layers[index].index}`
-    // );
-    // let lastActiveLayerColor = document.querySelector(".activeLayer");
-    // if (lastActiveLayerColor) {
-    //   lastActiveLayerColor.classList.remove("activeLayer");
-    // }
-    // let activeLayerColor = document.querySelector(
-    //   `.layer-container${layers[index].index}`
-    // );
-    // let activeColor = document.querySelector(".active-color");
-    // activeLayerIcoColor.style.backgroundColor = curColor;
-    // activeLayerColor.classList.add("activeLayer");
-    // activeColor.style.backgroundColor = curColor;
-    // layers[index].style.backgroundColor = curColor;
+    let activeLayerIcoColor = document.getElementById(
+      `#path-layer${layers[index].index}`
+    );
+    let lastActiveLayerColor = document.querySelector(".activeLayer");
+    if (lastActiveLayerColor) {
+      lastActiveLayerColor.classList.remove("activeLayer");
+    }
+    let activeLayerColor = document.querySelector(
+      `.layer-container${layers[index].index}`
+    );
+    let activeColor = document.querySelector(".active-color");
+    activeLayerIcoColor.style.backgroundColor = curColor;
+    activeLayerColor.classList.add("activeLayer");
+    activeColor.style.backgroundColor = curColor;
+    layers[index].style.backgroundColor = curColor;
   };
 
   return (

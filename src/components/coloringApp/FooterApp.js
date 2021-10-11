@@ -1,48 +1,56 @@
-import React from "react";
-import { useColorPalette } from "./EventsContext";
-import "./FooterApp.scss";
+import React, { useRef } from "react";
 
+import "./FooterApp.scss";
+import FooterColorPallete from "./footer/FooterColorPallete";
+import { useColorValues, useSlValues } from "./footer/FooterContext";
+let curValue = 60;
 const FooterApp = () => {
-  const colorPallete = useColorPalette();
+  let hue = 0;
+
+  const newSlValues = useSlValues();
+  // const [values, seValues] = useState(curValue);
+  const changeColorValues = useColorValues();
+  const colorsRef = useRef();
+
+  let h = 0;
+  const changeColors = (event) => {
+    const id = event.target.id;
+    if (id === "before") {
+      curValue -= 20;
+    } else if (id === "next") {
+      curValue += 20;
+    }
+    if (curValue === 0) {
+      curValue = 100;
+    } else if (curValue === 120) {
+      curValue = 20;
+    }
+
+    changeColorValues(curValue);
+    changeButtonsBackgroundColor();
+  };
+  const changeButtonsBackgroundColor = () => {
+    const allColorButtons = colorsRef.current.querySelectorAll(".color");
+    for (let i = 0; i < 9; i++) {
+      allColorButtons[
+        i
+      ].style.backgroundColor = `hsl(${h},${newSlValues.s}%,${newSlValues.l}%)`;
+      h += 40;
+    }
+  };
 
   return (
-    <footer className="app">
-      <div className="colors">
-        <div class="color color1" onClick={() => colorPallete(0, 38, 63)}></div>
-        <div
-          className="color color2"
-          onClick={() => colorPallete(40, 38, 63)}
-        ></div>
-        <div
-          className="color color3"
-          onClick={() => colorPallete(80, 38, 63)}
-        ></div>
-        <div
-          className="color color4"
-          onClick={() => colorPallete(120, 38, 63)}
-        ></div>
-        <div
-          className="color color5"
-          onClick={() => colorPallete(160, 38, 63)}
-        ></div>
-        <div
-          className="color color6"
-          onClick={() => colorPallete(200, 38, 63)}
-        ></div>
-        <div
-          className="color color7"
-          onClick={() => colorPallete(240, 38, 63)}
-        ></div>
-        <div
-          className="color color8"
-          onClick={() => colorPallete(280, 38, 63)}
-        ></div>
-        <div
-          className="color color9"
-          onClick={() => colorPallete(320, 38, 63)}
-        ></div>
+    <div className="app footer-app">
+      <div className="colors" ref={colorsRef}>
+        <div className="next-color">
+          <i className="arrow left" id="before" onClick={changeColors}></i>
+        </div>
+        <FooterColorPallete h={hue} newSlValues={newSlValues} />
+        <div className="next-color">
+          <i className="arrow right" id="next" onClick={changeColors}></i>
+        </div>
       </div>
-    </footer>
+    </div>
   );
 };
 export default FooterApp;

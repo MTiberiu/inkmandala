@@ -7,7 +7,6 @@ const PanelRight = () => {
   let pathSelected = { style: { fill: "white" } };
   const selectedPath = (path) => {
     pathSelected = path;
-    path.setAttribute("filter", "url(#ciqcd)");
   };
 
   const colorPathHandler = (color) => {

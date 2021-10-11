@@ -7,6 +7,7 @@ import PanelLeft from "./PanelLeft";
 import PanelRight from "./PanelRight";
 import FooterApp from "./FooterApp";
 import { FunctionalityProvider } from "./EventsContext";
+import { FooterProvider } from "./footer/FooterContext";
 import ConvertSvgToXml from "./ConvertSvgToXml";
 
 const BodyApp = (props) => {
@@ -43,7 +44,9 @@ const BodyApp = (props) => {
           <PanelRight />
         </div>
 
-        <FooterApp />
+        <FooterProvider>
+          <FooterApp />
+        </FooterProvider>
       </FunctionalityProvider>
       {/* <p>
         {info.title.rendered.replace("&#8211;", "-").replace("&#8217;", "'")}{" "}

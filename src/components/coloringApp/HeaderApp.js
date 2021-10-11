@@ -4,7 +4,6 @@ import HeaderAppButton from "./HeaderAppButton";
 import HslButtons from "./header/HslButtons";
 import ModeButons from "./header/ModeButtons";
 import StrokeSizeButtons from "./header/StrokeSizeButtons";
-import Ref from "./header/Ref";
 
 const SELECTED = {
   HUE: "hue",
@@ -16,9 +15,9 @@ const SELECTED = {
   NEON: "neon-effect",
   STROKESIZE: {
     REMOVE: "0",
-    ONE: "2",
-    TWO: "3",
-    THREE: "4",
+    ONE: "4",
+    TWO: "6",
+    THREE: "8",
     LOKED: "locked",
   },
 };
