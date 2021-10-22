@@ -14,7 +14,8 @@ export default function Posts(props) {
   const [remainingPosts, setRemainingPosts] = useState("");
   const [loading, setLoading] = useState(true);
   const [pages, setPages] = useState([]);
-  const ROUTE = process.env.REACT_APP_API;
+  // const ROUTE = process.env.REACT_APP_API;
+  const ROUTE = "https://inkmandala.com/ink/wp-json/wp/v2/";
   useEffect(() => {
     setLoading(true);
     axios({

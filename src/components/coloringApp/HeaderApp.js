@@ -51,6 +51,7 @@ const HeaderApp = () => {
 
     layerColors.forEach((layer) => {
       layer.style.backgroundColor = "transparent";
+      layer.style.borderColor = "black";
     });
   }
 
@@ -97,7 +98,6 @@ const HeaderApp = () => {
             setActive={resetColors}
           />
         </div>
-        <div className="menu-items reset-menu"></div>
       </nav>
     </header>
   );

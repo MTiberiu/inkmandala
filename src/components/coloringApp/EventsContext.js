@@ -52,7 +52,7 @@ const select = {
 
 export function FunctionalityProvider({ children }) {
   let selectedHSL = select.hsl.hue;
-  let curColor, h, s, l;
+  let curColor, curStrokeColor, h, s, l, sh, ss, sl;
   let selectedMode = "fill";
   let strokeSize = 0;
   let isStrokeLoked = false;
@@ -84,11 +84,18 @@ export function FunctionalityProvider({ children }) {
   const updateDefinedValues = (modeSelected) => {
     ({ h, s, l } = selectedPath[modeSelected]);
   };
-
-  const setColor = (color) => {
+  const checkIfStrokeIsOn = () => {
     if ((selectedMode === "stroke" && !isStrokeLoked) || selectedBoth) {
       selectedPath.setAttribute("stroke-width", strokeSize);
     }
+  };
+  const checkIfSelectedBothisOn = () => {
+    if (selectedBoth) {
+      checkSelectedEffect(h, s, l);
+    }
+  };
+  const setColor = (color) => {
+    checkIfStrokeIsOn();
     selectedPath.style[selectedMode] = color;
   };
 
@@ -96,14 +103,13 @@ export function FunctionalityProvider({ children }) {
     curColor = `hsl(${h}, ${s}%, ${l}%)`;
     setColor(curColor);
     selectedPath[modeSelected] = { h: h, s: s, l: l };
-    if (selectedBoth) {
-      checkSelectedEffect(h, s, l);
-    }
+    checkIfSelectedBothisOn();
   };
 
   const updateStrokeColor = (updateHue, updateSat, updateLight) => {
     selectedPath.style.stroke = `hsl(${updateHue}, ${updateSat}%, ${updateLight}%)`;
     selectedPath.stroke = { h: updateHue, s: updateSat, l: updateLight };
+    curStrokeColor = selectedPath.style.stroke;
   };
   const checkSelectedEffect = (hue, sat, light) => {
     if (effectsMode === select.effects.bubble) {
@@ -111,6 +117,7 @@ export function FunctionalityProvider({ children }) {
       updateStrokeColor(hue, sat, light);
     } else if (effectsMode === select.effects.neon) {
       light += 20;
+
       updateStrokeColor(hue, sat, light);
     }
   };
@@ -205,8 +212,24 @@ export function FunctionalityProvider({ children }) {
     }
   };
 
-  const selectedPathHandler = (curColor, selectedMode) => {
-    selectedPath.style[selectedMode] = curColor;
+  const selectedPathHandler = (pikerColor, path) => {
+    // if (path !== selectedPath) {
+    //   selectedPath = path;
+    // }
+    let colorPiker = `hsl(${pikerColor.h} , ${pikerColor.s}%, ${pikerColor.l}%)`;
+    curColor = selectedPath.style[selectedMode] = colorPiker;
+
+    selectedPath[selectedMode] = {
+      h: pikerColor.h,
+      s: pikerColor.s,
+      l: pikerColor.l,
+    };
+    [h, s, l] = [pikerColor.h, pikerColor.s, pikerColor.l];
+    checkIfStrokeIsOn();
+    checkIfSelectedBothisOn();
+    if (selectedPath.index !== undefined) {
+      setActiveColor(selectedPath.index, selectedMode);
+    }
   };
 
   const eventSwitchValues = (e) => {
@@ -214,7 +237,7 @@ export function FunctionalityProvider({ children }) {
     // selectedPath = e.target;
     isPathSelected(e);
     checkSelected(selectedMode);
-    setSelectedPath(index);
+    setSelectedPath(index, selectedMode);
   };
 
   const layers = [];
@@ -233,7 +256,7 @@ export function FunctionalityProvider({ children }) {
   };
 
   const setSelectedPath = (index) => {
-    setActiveColor(index);
+    setActiveColor(index, selectedMode);
     pathReceiveValues(selectedMode);
   };
 
@@ -245,10 +268,12 @@ export function FunctionalityProvider({ children }) {
   };
 
   // find a better solution
-  const setActiveColor = (index) => {
+  const setActiveColor = (index, selectedMode) => {
+    console.log("index", index);
     let activeLayerIcoColor = document.getElementById(
       `#path-layer${layers[index].index}`
     );
+
     let lastActiveLayerColor = document.querySelector(".activeLayer");
     if (lastActiveLayerColor) {
       lastActiveLayerColor.classList.remove("activeLayer");
@@ -257,9 +282,25 @@ export function FunctionalityProvider({ children }) {
       `.layer-container${layers[index].index}`
     );
     let activeColor = document.querySelector(".active-color");
-    activeLayerIcoColor.style.backgroundColor = curColor;
     activeLayerColor.classList.add("activeLayer");
+
     activeColor.style.backgroundColor = curColor;
+    if (selectedBoth) {
+      activeLayerIcoColor.style.backgroundColor = curColor;
+      activeLayerIcoColor.style.borderColor = curStrokeColor;
+      activeLayerColor.dataset.fillH = h;
+      activeLayerColor.dataset.fillS = s;
+      activeLayerColor.dataset.fillL = l;
+      activeLayerColor.dataset.strokeH = sh;
+      activeLayerColor.dataset.strokeS = ss;
+      activeLayerColor.dataset.strokeL = sl;
+      activeLayerColor.dataset.strokeSize = strokeSize;
+    }
+    if (selectedMode === "fill") {
+      activeLayerIcoColor.style.backgroundColor = curColor;
+    } else {
+      activeLayerIcoColor.style.borderColor = curColor;
+    }
     layers[index].style.backgroundColor = curColor;
   };
 

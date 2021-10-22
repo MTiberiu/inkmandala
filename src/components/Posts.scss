@@ -76,6 +76,11 @@
   }
 }
 
+.thumbnails {
+  will-change: transform;
+  image-rendering: -webkit-optimize-contrast;
+}
+
 @keyframes img-loading {
   30% {
     filter: blur(0);

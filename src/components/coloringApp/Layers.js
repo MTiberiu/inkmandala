@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+
 import "./Layers.scss";
 import Layer from "./Layer";
 
@@ -21,8 +22,6 @@ const Layers = ({ selectedPath }) => {
 
   return (
     <div className="layers">
-      {/* <button onClick={addLayersHandler}></button>
-      You Got {iteratePaths.length - 1} path to color */}
       {iteratePaths.map((layer, index) => {
         return (
           <Layer

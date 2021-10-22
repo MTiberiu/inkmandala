@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useColorPalette } from "../EventsContext";
 const FooterColorPallete = (props) => {
   let { h } = props.h;

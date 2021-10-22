@@ -1,10 +1,17 @@
 import React from "react";
 import { useLayers } from "./EventsContext";
+import { useColorPalette } from "./EventsContext";
 import "./Layer.scss";
 const Layer = (props) => {
   const Layers = useLayers();
-  function addLayersHandler() {
+  const colorPallete = useColorPalette();
+  function addLayersHandler(event) {
     props.selectedPath(Layers[props.index]);
+    colorPallete(
+      event.target.dataset.fillH,
+      event.target.dataset.fillS,
+      event.target.dataset.fillL
+    );
   }
 
   return (
@@ -19,7 +26,7 @@ const Layer = (props) => {
         // onWheel={Layers[props.index].onwheel}
         key={props.layer}
       ></div>
-      <div className="shape-index"> Shape {Layers[props.index].index} </div>
+      <div className="shape-index"> Shape {Layers[props.index].index - 5} </div>
     </div>
   );
 };

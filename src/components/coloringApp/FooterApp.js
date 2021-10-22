@@ -5,13 +5,11 @@ import FooterColorPallete from "./footer/FooterColorPallete";
 import { useColorValues, useSlValues } from "./footer/FooterContext";
 let curValue = 60;
 const FooterApp = () => {
-  let hue = 0;
-
   const newSlValues = useSlValues();
   // const [values, seValues] = useState(curValue);
   const changeColorValues = useColorValues();
   const colorsRef = useRef();
-
+  let hue = 0;
   let h = 0;
   const changeColors = (event) => {
     const id = event.target.id;
@@ -25,7 +23,7 @@ const FooterApp = () => {
     } else if (curValue === 120) {
       curValue = 20;
     }
-
+    // depending on the curValue, set saturation and light values in  FooterContext
     changeColorValues(curValue);
     changeButtonsBackgroundColor();
   };
