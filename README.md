@@ -13,7 +13,9 @@
 [Live Demo](https://inkmandala.com "Live Demo")
 
 The app introduce a new way to color vector graphic shapes.
-The solution was to add "mouse wheel" in the proces of coloring
+The solution was to add "mouse wheel" in the proces of coloring.
+
+The mouse wheel motode, dosn't try to replace the classic mothods of chosing colors, on the contrary, after a color is chosed for the given shape, the method adds the possibility to make fine changes on the colors, keeping the focus on the shapes and not on the color that needs to be chosen.
 
 ```ruby
  const addEventsToPaths = (props) => {
