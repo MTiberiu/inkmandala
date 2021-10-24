@@ -7,3 +7,7 @@
 ## Video Demo
 
 [Demo](https://youtu.be/VzO2J6Fo5ZQ "Demo")
+
+## App Demo
+
+[Live Demo](https://inkmandala.com "Live Demo")
