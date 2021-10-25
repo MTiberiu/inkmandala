@@ -24,8 +24,22 @@ The mouse wheel method, doesn't try to replace the classic methods of choosing c
 
 ```
 
+To remove the conflict with the page scroll, when using the mouse wheel, the container of the app should always be equal to the viewport height
+
+```
+#container {
+  position: sticky;
+  left: 0px;
+  top: 0px;
+  z-index: 200;
+  height: 100vh;
+  width: 100vw;
+  outline: 0;
+}
+```
+
 The logic is divided in 3 parts and it uses HSL color model to determinate how to calculate the color values.
-Depends on the user choise, you can use mouse whell to change the hue, saturation or light of the color.
+Depends on the user choise, you can use mouse wheel to change the hue, saturation or light of the color.
 
 ```ruby
 const updateMode = (checkSelected) => {
@@ -47,7 +61,6 @@ const checkSelected = (modeSelected) => {
         colorValues = selectedPath[modeSelected].h;
         updateDefinedValues(modeSelected);
         changeColorValue();
-
         h = colorValues;
       } else if (selectedHSL === select.hsl.saturation) {
         colorValues = selectedPath[modeSelected].s;
@@ -64,7 +77,7 @@ const checkSelected = (modeSelected) => {
   };
 ```
 
-Using detection of the scroll direction, helped to calculate the value of the hue, saturation and light colors.
+The value of the hue, saturation and light colors is calculated with detection of the scroll direction.
 
 ```ruby
 window.addEventListener("wheel", function (event) {
