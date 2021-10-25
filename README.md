@@ -13,7 +13,7 @@
 [Live Demo](https://inkmandala.com "Live Demo")
 
 The app introduce a new way to color vector graphic shapes.
-The solution was to add "mouse wheel" in the proces of coloring.
+The solution was to add "mouse wheel" in the process of coloring.
 
 The mouse wheel method, doesn't try to replace the classic methods of choosing colors, on the contrary, after a color is chosen for the given shape, the method adds the possibility to make fine changes on the colors, keeping the focus on the shapes and not on the color that needs to be chosen.
 
@@ -26,6 +26,17 @@ The mouse wheel method, doesn't try to replace the classic methods of choosing c
 
 The logic is divided in 3 parts and it uses HSL color model to determinate how to calculate the color values.
 Depends on the user choise, you can use mouse whell to change the hue, saturation or light of the color.
+
+```ruby
+const updateMode = (checkSelected) => {
+    selectedHSL = checkSelected;
+    if (checkSelected === select.hsl.hue) {
+      setColorRange(0, 360);
+    } else {
+      setColorRange(10, 90);
+    }
+  };
+```
 
 ```ruby
 const checkSelected = (modeSelected) => {
