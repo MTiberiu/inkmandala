@@ -24,18 +24,31 @@ The mouse wheel method, doesn't try to replace the classic methods of choosing c
 
 ```
 
-The HSL color model played an important role in finding a logic that can add a value in the process of coloring, when the decision was to use mouse wheel as a tool to color vector shapes.
-
-The logic is divided in 3 steps.
+The logic is divided in 3 parts and it uses HSL color model to determinate how to calculate the color values.
 Depends on the user choise, you can use mouse whell to change the hue, saturation or light of the color.
 
 ```ruby
- const updateMode = (param) => {
-    selectedHSL = param;
-    if (param === select.hsl.hue) {
-      setColorRange(0, 360);
+const checkSelected = (modeSelected) => {
+    if (!selectedPath[modeSelected]) {
+      h = colorValues;
     } else {
-      setColorRange(10, 90);
+      if (selectedHSL === select.hsl.hue) {
+        colorValues = selectedPath[modeSelected].h;
+        updateDefinedValues(modeSelected);
+        changeColorValue();
+
+        h = colorValues;
+      } else if (selectedHSL === select.hsl.saturation) {
+        colorValues = selectedPath[modeSelected].s;
+        updateDefinedValues(modeSelected);
+        changeColorValue();
+        s = colorValues;
+      } else if (selectedHSL === select.hsl.light) {
+        colorValues = selectedPath[modeSelected].l;
+        updateDefinedValues(modeSelected);
+        changeColorValue();
+        l = colorValues;
+      }
     }
   };
 ```
