@@ -4,7 +4,6 @@ const PanelLeft = ({ onClickClosePage }) => {
   function closePageHadler() {
     onClickClosePage();
     document.body.style.overflow = "visible";
-    window.history.pushState("", "New Page Title", "/");
   }
   function printPage() {
     return printJS({
@@ -12,7 +11,8 @@ const PanelLeft = ({ onClickClosePage }) => {
       type: "html",
       targetStyles: ["*"],
       scanStyles: false,
-      style: "svg {margin-top: 21%;} @page { size: A4 portrait; }",
+      style:
+        "svg {position:absolute; top:0; bottom:0; left:0;} @page { size: A4 portrait; }",
     });
   }
 
